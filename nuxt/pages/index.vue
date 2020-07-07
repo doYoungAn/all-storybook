@@ -28,11 +28,21 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue } from 'nuxt-property-decorator';
+import Vue from 'vue';
+import { Component } from 'nuxt-property-decorator';
+import gql from 'graphql-tag';
+import 'vue-apollo';
 
-@Component({})
+@Component({
+  apollo: {
+    
+  }
+})
 export default class App extends Vue {
-  
+
+  public async mounted() {
+    console.log('mounted', this.$apollo);
+  }
 }
 </script>
 
