@@ -53,7 +53,15 @@ export default {
   modules: [
     // Doc: https://axios.nuxtjs.org/usage
     '@nuxtjs/axios',
+    '@nuxtjs/apollo'
   ],
+  apollo: {
+    clientConfigs: {
+      default: {
+        httpEndpoint: 'http://localhost:5000',
+      },
+    },
+  },
   /*
   ** Axios module configuration
   ** See https://axios.nuxtjs.org/options
