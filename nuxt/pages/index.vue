@@ -31,6 +31,7 @@
 import Vue from 'vue';
 import { Component } from 'nuxt-property-decorator';
 import gql from 'graphql-tag';
+import { ApolloQueryResult, QueryOptions } from 'apollo-client';
 import 'vue-apollo';
 
 @Component({
@@ -41,7 +42,32 @@ import 'vue-apollo';
 export default class App extends Vue {
 
   public async mounted() {
-    console.log('mounted', this.$apollo);
+    try {
+      console.log('mounted', this.$apollo);
+      const options: QueryOptions = {
+        query: gql`
+          query($filter: RowFilter) {
+            pageNormal {
+              actionZone {
+                selectButton
+              }
+              rowsZone(filter: $filter) {
+                id
+              }
+            }
+          }
+        `,
+        variables: {
+          filter: {
+            payment: ""
+          }
+        },
+      }
+      const response: ApolloQueryResult<Loading> = await this.$apollo.query(options);
+      console.log('response', response);
+    } catch(e) {
+      console.log('catch', e)
+    }
   }
 }
 </script>
